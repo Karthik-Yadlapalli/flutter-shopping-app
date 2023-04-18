@@ -32,7 +32,7 @@ class UserProductItem extends StatelessWidget {
               },
               child: const Icon(
                 Icons.delete,
-                color: Colors.red,
+                color: Color.fromARGB(255, 231, 83, 72),
               ),
             )
           ],
