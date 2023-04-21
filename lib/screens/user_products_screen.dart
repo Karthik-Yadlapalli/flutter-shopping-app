@@ -1,7 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/providers/products_provider.dart';
@@ -29,6 +26,7 @@ class UserProductScreen extends StatelessWidget {
         ],
       ),
       body: RefreshIndicator(
+        displacement: 600.0,
         onRefresh: () => _refreshProducts(context),
         child: ListView.builder(
             itemCount: productData.item.length,
