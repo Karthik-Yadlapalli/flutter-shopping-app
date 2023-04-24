@@ -107,7 +107,6 @@ class Cart extends ChangeNotifier {
   //           quentity: value.quentity - 1,
   //           price: value.price,
   //           title: value.title));
-
   //   notifyListeners();
   // }
 

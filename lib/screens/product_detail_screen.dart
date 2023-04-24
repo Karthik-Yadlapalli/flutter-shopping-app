@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages, deprecated_member_use
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import '../providers/products_provider.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +39,9 @@ class ProductDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 height: 600,
                 width: 400,
-                child: Image.network(loadedProduct.imageUrl),
+                child: Hero(
+                    tag: productId,
+                    child: Image.network(loadedProduct.imageUrl)),
               ),
               const SizedBox(height: 8),
               Text(

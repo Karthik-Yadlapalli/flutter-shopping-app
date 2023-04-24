@@ -34,17 +34,7 @@ class CartScreen extends StatelessWidget {
                     label: Text('\$ ${cartItem.totalAmt}'),
                     backgroundColor: const Color.fromARGB(255, 115, 153, 71),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        Provider.of<Orders>(context, listen: false).addOrders(
-                            cartItem.item.values.toList(),
-                            double.parse(cartItem.totalAmt));
-                        cartItem.clear();
-                      },
-                      child: const Text(
-                        'Place Order',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ))
+                  OrderButton(cartItem: cartItem)
                 ],
               ),
             ),
@@ -64,5 +54,44 @@ class CartScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    super.key,
+    required this.cartItem,
+  });
+  final Cart cartItem;
+  @override
+  State<OrderButton> createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  bool _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: (double.parse(widget.cartItem.totalAmt) <= 0 || _isLoading)
+            ? null
+            : () async {
+                setState(() {
+                  _isLoading = true;
+                });
+                await Provider.of<Orders>(context, listen: false).addOrders(
+                    widget.cartItem.item.values.toList(),
+                    double.parse(widget.cartItem.totalAmt));
+                setState(() {
+                  _isLoading = false;
+                });
+
+                widget.cartItem.clear();
+              },
+        child: _isLoading
+            ? const CircularProgressIndicator()
+            : const Text(
+                'Place Order',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ));
   }
 }

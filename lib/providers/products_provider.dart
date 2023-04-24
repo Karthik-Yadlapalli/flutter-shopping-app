@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_final_fields, unused_field, list_remove_unrelated_type, prefer_const_constructors, avoid_print, use_rethrow_when_possible
-
+// ignore_for_file: prefer_final_fields, unused_field, list_remove_unrelated_type, prefer_const_constructors, avoid_print, use_rethrow_when_possible, unnecessary_null_comparison
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -152,6 +151,7 @@ class Products extends ChangeNotifier {
     return item.firstWhere((element) => element.id == id);
   }
 
+  ///Fetching Products from DB///
   Future<void> fetchAndSetProducts() async {
     final url = Uri.https(
       'flutter-shop-3f87c-default-rtdb.firebaseio.com',
@@ -161,26 +161,31 @@ class Products extends ChangeNotifier {
       final response = await http.get(url);
       final extractedProducts =
           json.decode(response.body) as Map<String, dynamic>;
+      if (extractedProducts == null) {
+        return;
+      }
       final List<Product> loadedProduct = [];
       extractedProducts.forEach((prodId, prodData) {
         loadedProduct.add(Product(
             dimensions: prodData['dimensions'],
-            shipping_return_details: prodData['shipping_return_details'],
+            shipping_return_details: prodData['shipping'],
             material: prodData['material'],
-            careInstruction: prodData['careInstruction'],
+            careInstruction: prodData['care'],
             id: prodId,
-            description: prodData['description'],
+            description: prodData['descreption'],
             title: prodData['title'],
-            imageUrl: prodData['imageUrl'],
+            imageUrl: prodData['imgUrl'],
             price: prodData['price']));
       });
       _items = loadedProduct;
       notifyListeners();
     } catch (error) {
+      print(error);
       throw error;
     }
   }
 
+  ///Adding Products to DB///
   Future<void> addProduct(Product product) async {
     final url = Uri.https(
       'flutter-shop-3f87c-default-rtdb.firebaseio.com',
@@ -201,7 +206,6 @@ class Products extends ChangeNotifier {
           'isFav': product.isFavourite
         }),
       );
-
       var newProduct = Product(
           dimensions: product.dimensions,
           shipping_return_details: product.shipping_return_details,
@@ -220,26 +224,27 @@ class Products extends ChangeNotifier {
     }
   }
 
+  ///Deleting Products from DB///
   Future<void> deleteProduct(String id) async {
     final url = Uri.https(
       'flutter-shop-3f87c-default-rtdb.firebaseio.com',
       '/products/$id.json',
     );
-
     final existingProductIndex =
         _items.indexWhere((element) => element.id == id);
     Product? existingProduct = _items[existingProductIndex];
-    _items.remove(existingProductIndex);
+    _items.removeAt(existingProductIndex);
     notifyListeners();
     final response = await http.delete(url);
     if (response.statusCode >= 400) {
       _items.insert(existingProductIndex, existingProduct);
       notifyListeners();
-      throw HttpException("Can't delete the product");
+      throw HttpException("Can't delete the product.");
     }
     existingProduct = null;
   }
 
+  ///Updating Products in DB///
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((element) => element.id == id);
     if (prodIndex >= 0) {
@@ -252,10 +257,10 @@ class Products extends ChangeNotifier {
             'title': newProduct.title,
             'descreption': newProduct.description,
             'dimensions': newProduct.dimensions,
-            'shipping_return_details': newProduct.shipping_return_details,
-            'careInstruction': newProduct.careInstruction,
+            'shipping': newProduct.shipping_return_details,
+            'care': newProduct.careInstruction,
             'material': newProduct.material,
-            'imageUrl': newProduct.imageUrl,
+            'imgUrl': newProduct.imageUrl,
             'price': newProduct.price
           }));
       _items[prodIndex] = newProduct;

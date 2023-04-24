@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, depend_on_referenced_packages
+// ignore_for_file: avoid_print, depend_on_referenced_packages, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import '../providers/products.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class _EditProductState extends State<EditProduct> {
   var _initValues = {
     'title': '',
     'description': '',
-    'price': 0,
+    'price': '',
     'imageUrl': '',
     'shipping': '',
     'care': '',
@@ -141,11 +141,11 @@ class _EditProductState extends State<EditProduct> {
       //   });
       //   Navigator.of(context).pop();
       // }
-      setState(() {
-        _isLoading = false;
-      });
-      Navigator.of(context).pop();
     }
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
   }
 
   @override
@@ -174,6 +174,7 @@ class _EditProductState extends State<EditProduct> {
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'Title'),
                         textInputAction: TextInputAction.next,
+                        initialValue: _initValues['title'].toString(),
                         onFieldSubmitted: (_) {
                           FocusScope.of(context).requestFocus(_priceFocuseNode);
                         },
@@ -199,6 +200,7 @@ class _EditProductState extends State<EditProduct> {
                         },
                       ),
                       TextFormField(
+                        initialValue: _initValues['price'].toString(),
                         decoration: const InputDecoration(labelText: 'Price'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
@@ -235,6 +237,7 @@ class _EditProductState extends State<EditProduct> {
                         },
                       ),
                       TextFormField(
+                        initialValue: _initValues['description'].toString(),
                         decoration:
                             const InputDecoration(labelText: 'Description'),
                         maxLines: 4,
@@ -267,6 +270,7 @@ class _EditProductState extends State<EditProduct> {
                         },
                       ),
                       TextFormField(
+                          initialValue: _initValues['material'].toString(),
                           decoration:
                               const InputDecoration(labelText: 'Material'),
                           //maxLines: 3,
@@ -288,6 +292,7 @@ class _EditProductState extends State<EditProduct> {
                                 price: _editedProduct.price);
                           }),
                       TextFormField(
+                          initialValue: _initValues['care'].toString(),
                           decoration: const InputDecoration(
                               labelText: 'Care Instructions'),
                           //maxLines: 3,
@@ -309,6 +314,7 @@ class _EditProductState extends State<EditProduct> {
                                 price: _editedProduct.price);
                           }),
                       TextFormField(
+                          initialValue: _initValues['dimensions'].toString(),
                           decoration:
                               const InputDecoration(labelText: 'Dimensions'),
                           //maxLines: 3,
@@ -330,6 +336,7 @@ class _EditProductState extends State<EditProduct> {
                                 price: _editedProduct.price);
                           }),
                       TextFormField(
+                          initialValue: _initValues['shipping'].toString(),
                           decoration: const InputDecoration(
                               labelText: 'Shipping and return details'),
                           maxLines: 3,

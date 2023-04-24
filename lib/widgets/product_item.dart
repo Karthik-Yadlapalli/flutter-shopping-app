@@ -11,7 +11,6 @@ import '../screens/product_detail_screen.dart';
 
 class ProductItemCard extends StatefulWidget {
   const ProductItemCard({super.key});
-
   @override
   State<ProductItemCard> createState() => _ProductItemCardState();
 }
@@ -63,9 +62,12 @@ class _ProductItemCardState extends State<ProductItemCard> {
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              product.imageUrl,
-                              fit: BoxFit.cover,
+                            child: Hero(
+                              tag: product.id,
+                              child: Image.network(
+                                product.imageUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
