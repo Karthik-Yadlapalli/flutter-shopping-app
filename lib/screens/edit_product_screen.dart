@@ -171,6 +171,7 @@ class _EditProductState extends State<EditProduct> {
                   key: _form,
                   child: ListView(
                     children: <Widget>[
+                      ///Title Field///
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'Title'),
                         textInputAction: TextInputAction.next,
@@ -199,6 +200,8 @@ class _EditProductState extends State<EditProduct> {
                               price: _editedProduct.price);
                         },
                       ),
+
+                      ///Price Field///
                       TextFormField(
                         initialValue: _initValues['price'].toString(),
                         decoration: const InputDecoration(labelText: 'Price'),
@@ -236,6 +239,8 @@ class _EditProductState extends State<EditProduct> {
                               price: double.parse(value!));
                         },
                       ),
+
+                      ///Description Field///
                       TextFormField(
                         initialValue: _initValues['description'].toString(),
                         decoration:
@@ -269,6 +274,8 @@ class _EditProductState extends State<EditProduct> {
                               price: _editedProduct.price);
                         },
                       ),
+
+                      ///Material Field///
                       TextFormField(
                           initialValue: _initValues['material'].toString(),
                           decoration:
@@ -291,6 +298,8 @@ class _EditProductState extends State<EditProduct> {
                                 imageUrl: _editedProduct.imageUrl,
                                 price: _editedProduct.price);
                           }),
+
+                      ///Care Instructions///
                       TextFormField(
                           initialValue: _initValues['care'].toString(),
                           decoration: const InputDecoration(
@@ -313,6 +322,8 @@ class _EditProductState extends State<EditProduct> {
                                 imageUrl: _editedProduct.imageUrl,
                                 price: _editedProduct.price);
                           }),
+
+                      ///Dimensions Field///
                       TextFormField(
                           initialValue: _initValues['dimensions'].toString(),
                           decoration:
@@ -335,6 +346,8 @@ class _EditProductState extends State<EditProduct> {
                                 imageUrl: _editedProduct.imageUrl,
                                 price: _editedProduct.price);
                           }),
+
+                      ///Shipping Details Field///
                       TextFormField(
                           initialValue: _initValues['shipping'].toString(),
                           decoration: const InputDecoration(
@@ -356,6 +369,8 @@ class _EditProductState extends State<EditProduct> {
                                 imageUrl: _editedProduct.imageUrl,
                                 price: _editedProduct.price);
                           }),
+
+                      ///Image Url Field///
                       Row(
                         //mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,

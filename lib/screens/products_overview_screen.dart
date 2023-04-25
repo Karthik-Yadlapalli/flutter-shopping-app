@@ -40,7 +40,6 @@ class _ProductsOverviewState extends State<ProductsOverview> {
       });
     }
     _isInit = false;
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
 

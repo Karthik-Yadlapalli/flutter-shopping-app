@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, avoid_web_libraries_in_flutter, unnecessary_null_comparison
+// ignore_for_file: depend_on_referenced_packages, avoid_web_libraries_in_flutter, unnecessary_null_comparison, unrelated_type_equality_checks
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shop_app/providers/cart.dart';
@@ -20,7 +20,6 @@ class OrderItem {
 class Orders extends ChangeNotifier {
   List<OrderItem> _orders = [];
   final Cart cart = Cart();
-
   List<OrderItem> get orders => _orders;
 
 //Adding Orders to DB
@@ -64,12 +63,11 @@ class Orders extends ChangeNotifier {
       '/orders.json',
     );
     final response = await http.get(url);
+    final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     if (extractedData == null) {
       return;
     }
-
-    final List<OrderItem> loadedOrders = [];
     extractedData.forEach((orderId, orderData) {
       loadedOrders.add(OrderItem(
           amount: orderData['amount'],
@@ -84,7 +82,7 @@ class Orders extends ChangeNotifier {
                   isInCart: element['iscarted']))
               .toList()));
     });
-    _orders = loadedOrders;
+    _orders = loadedOrders.reversed.toList();
     notifyListeners();
   }
 }

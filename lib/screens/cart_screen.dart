@@ -41,16 +41,23 @@ class CartScreen extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Expanded(
-              child: ListView.builder(
-                  itemCount: cartItem.itemCount,
-                  itemBuilder: (context, index) {
-                    return ci.CartItem(
-                        productId: cartItem.item.keys.toList()[index],
-                        id: cartItem.item.values.toList()[index].id,
-                        quentity: cartItem.item.values.toList()[index].quentity,
-                        price: cartItem.item.values.toList()[index].price,
-                        title: cartItem.item.values.toList()[index].title);
-                  }))
+              child: cartItem.item.isEmpty
+                  ? const Center(
+                      child: Text(
+                      'your cart is Empty!!',
+                      style: TextStyle(fontSize: 20),
+                    ))
+                  : ListView.builder(
+                      itemCount: cartItem.itemCount,
+                      itemBuilder: (context, index) {
+                        return ci.CartItem(
+                            productId: cartItem.item.keys.toList()[index],
+                            id: cartItem.item.values.toList()[index].id,
+                            quentity:
+                                cartItem.item.values.toList()[index].quentity,
+                            price: cartItem.item.values.toList()[index].price,
+                            title: cartItem.item.values.toList()[index].title);
+                      }))
         ],
       ),
     );
@@ -84,7 +91,6 @@ class _OrderButtonState extends State<OrderButton> {
                 setState(() {
                   _isLoading = false;
                 });
-
                 widget.cartItem.clear();
               },
         child: _isLoading
