@@ -38,7 +38,7 @@ class CartItem extends StatelessWidget {
             child: FittedBox(child: Text('\$$price')),
           ),
           title: Text(title),
-          trailing: Container(
+          trailing: SizedBox(
               width: 70,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,20 +46,20 @@ class CartItem extends StatelessWidget {
                   GestureDetector(
                       onTap: () {
                         Provider.of<Cart>(context, listen: false)
-                            .qIncrement(productId);
+                            .qDecrement(productId);
                       },
-                      child: Icon(
-                        Icons.add,
+                      child: const Icon(
+                        Icons.remove,
                         size: 15,
                       )),
                   Text('$quentity X'),
                   GestureDetector(
                       onTap: () {
                         Provider.of<Cart>(context, listen: false)
-                            .qDecrement(productId);
+                            .qIncrement(productId);
                       },
-                      child: Icon(
-                        Icons.remove,
+                      child: const Icon(
+                        Icons.add,
                         size: 15,
                       ))
                 ],

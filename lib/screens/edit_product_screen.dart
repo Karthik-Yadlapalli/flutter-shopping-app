@@ -246,7 +246,7 @@ class _EditProductState extends State<EditProduct> {
                         decoration:
                             const InputDecoration(labelText: 'Description'),
                         maxLines: 4,
-                        maxLength: 200,
+                        maxLength: 150,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.multiline,
                         focusNode: _descriptionFocuseNode,

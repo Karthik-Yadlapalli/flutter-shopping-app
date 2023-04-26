@@ -28,6 +28,7 @@ class Products extends ChangeNotifier {
       'flutter-shop-3f87c-default-rtdb.firebaseio.com',
       '/products.json',
     );
+
     try {
       final response = await http.get(url);
       final extractedProducts =
