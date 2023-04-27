@@ -6,7 +6,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 135,
+      width: 140,
       shadowColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       child: Column(children: [
