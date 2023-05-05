@@ -58,22 +58,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-//  Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (context) => AuthService(),
-//       builder: (context, _) => MultiProvider(
-//         providers: [
-//           ChangeNotifierProxyProvider<AuthService, Entries>(
-//             create: (_) =>
-//                 Entries(Provider.of<AuthService>(context, listen: false).user),
-//             lazy: false,
-//             update: (_, auth, previousEntries) => Entries(
-//               auth.user,
-//             ),
-//           ),
-//         ],

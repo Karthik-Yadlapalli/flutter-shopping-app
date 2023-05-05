@@ -17,12 +17,13 @@ class Auth extends ChangeNotifier {
   String? get token {
     if (_expireDate != null &&
         _expireDate!.isAfter(DateTime.now()) &&
-        _tocken != null) {
+        _tocken != null)
+      // ignore: curly_braces_in_flow_control_structures
       return _tocken!;
-    }
     return null;
   }
 
+  ///SignUp of creating account///
   Future<void> signUP(String userName, String email, String password) async {
     final url = Uri.https(
         'identitytoolkit.googleapis.com',
@@ -43,6 +44,7 @@ class Auth extends ChangeNotifier {
     }
   }
 
+  ///Login with email and password///
   Future<void> login(String email, String password) async {
     final url = Uri.https(
         'identitytoolkit.googleapis.com',

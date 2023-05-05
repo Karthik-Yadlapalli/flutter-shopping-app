@@ -16,25 +16,25 @@ class AuthScreen extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
     // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
     // transformConfig.translate(-10.0);
-    return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromARGB(255, 147, 248, 182).withOpacity(0.5),
-                  const Color.fromARGB(221, 86, 188, 121).withOpacity(0.9),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [0, 1],
+    return SafeArea(
+      child: Scaffold(
+        // resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color.fromARGB(255, 147, 248, 182).withOpacity(0.5),
+                    const Color.fromARGB(221, 86, 188, 121).withOpacity(0.9),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: const [0, 1],
+                ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
+            Container(
               height: deviceSize.height,
               width: deviceSize.width,
               child: Column(
@@ -57,8 +57,8 @@ class AuthScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -319,7 +319,7 @@ class _AuthCardState extends State<AuthCard> {
                                 color: Colors.black, fontSize: 13),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: ' Sign up',
+                                  text: 'Sign up',
                                   style: const TextStyle(
                                       color: Colors.blueAccent, fontSize: 13),
                                   recognizer: TapGestureRecognizer()

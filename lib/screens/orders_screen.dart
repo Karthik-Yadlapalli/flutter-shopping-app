@@ -32,12 +32,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Your Orders"),
-          centerTitle: true,
-        ),
-        body: _bodyWidget());
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Your Orders"),
+            centerTitle: true,
+          ),
+          body: _bodyWidget()),
+    );
   }
 
   Widget _bodyWidget() {

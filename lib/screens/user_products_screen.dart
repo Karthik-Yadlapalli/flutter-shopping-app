@@ -14,27 +14,29 @@ class UserProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Products'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/edit_product');
-              },
-              icon: const Icon(Icons.add))
-        ],
-      ),
-      body: RefreshIndicator(
-        displacement: 600.0,
-        onRefresh: () => _refreshProducts(context),
-        child: ListView.builder(
-            itemCount: productData.item.length,
-            itemBuilder: (context, index) => Card(
-                child: UserProductItem(
-                    id: productData.item[index].id,
-                    imgUrl: productData.item[index].imageUrl,
-                    title: productData.item[index].title))),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Your Products'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/edit_product');
+                },
+                icon: const Icon(Icons.add))
+          ],
+        ),
+        body: RefreshIndicator(
+          displacement: 600.0,
+          onRefresh: () => _refreshProducts(context),
+          child: ListView.builder(
+              itemCount: productData.item.length,
+              itemBuilder: (context, index) => Card(
+                  child: UserProductItem(
+                      id: productData.item[index].id,
+                      imgUrl: productData.item[index].imageUrl,
+                      title: productData.item[index].title))),
+        ),
       ),
     );
   }

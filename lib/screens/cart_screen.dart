@@ -13,52 +13,56 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartItem = Provider.of<Cart>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cart Items'),
-      ),
-      body: Column(
-        children: [
-          Card(
-            margin: const EdgeInsets.all(10),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    "Total",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  Chip(
-                    label: Text('\$ ${cartItem.totalAmt}'),
-                    backgroundColor: const Color.fromARGB(255, 115, 153, 71),
-                  ),
-                  OrderButton(cartItem: cartItem)
-                ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Cart Items'),
+        ),
+        body: Column(
+          children: [
+            Card(
+              margin: const EdgeInsets.all(10),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    const Text(
+                      "Total",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    Chip(
+                      label: Text('\$ ${cartItem.totalAmt}'),
+                      backgroundColor: const Color.fromARGB(255, 115, 153, 71),
+                    ),
+                    OrderButton(cartItem: cartItem)
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 30),
-          Expanded(
-              child: cartItem.item.isEmpty
-                  ? const Center(
-                      child: Text(
-                      'your cart is Empty!!',
-                      style: TextStyle(fontSize: 20),
-                    ))
-                  : ListView.builder(
-                      itemCount: cartItem.itemCount,
-                      itemBuilder: (context, index) {
-                        return ci.CartItem(
-                            productId: cartItem.item.keys.toList()[index],
-                            id: cartItem.item.values.toList()[index].id,
-                            quentity:
-                                cartItem.item.values.toList()[index].quentity,
-                            price: cartItem.item.values.toList()[index].price,
-                            title: cartItem.item.values.toList()[index].title);
-                      }))
-        ],
+            const SizedBox(height: 30),
+            Expanded(
+                child: cartItem.item.isEmpty
+                    ? const Center(
+                        child: Text(
+                        'your cart is Empty!!',
+                        style: TextStyle(fontSize: 20),
+                      ))
+                    : ListView.builder(
+                        itemCount: cartItem.itemCount,
+                        itemBuilder: (context, index) {
+                          return ci.CartItem(
+                              productId: cartItem.item.keys.toList()[index],
+                              id: cartItem.item.values.toList()[index].id,
+                              quentity:
+                                  cartItem.item.values.toList()[index].quentity,
+                              price: cartItem.item.values.toList()[index].price,
+                              title:
+                                  cartItem.item.values.toList()[index].title);
+                        }))
+          ],
+        ),
       ),
     );
   }

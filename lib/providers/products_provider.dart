@@ -10,10 +10,6 @@ class Products extends ChangeNotifier {
 
   // var _favoritesOnly = false;
 
-  // final String authToken;
-
-  // Products(this.authToken, this._items);
-
   List<Product> get item {
     return [..._items];
   }

@@ -45,63 +45,66 @@ class _ProductsOverviewState extends State<ProductsOverview> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plant-O'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  _showOnlyFavorites = !_showOnlyFavorites;
-                });
-              },
-              icon: Icon(
-                  _showOnlyFavorites ? Icons.favorite : Icons.favorite_border)),
-          // PopupMenuButton(
-          //     onSelected: (FilterOptions selectedValue) {
-          //       setState(() {
-          //         if (selectedValue == FilterOptions.Favorites) {
-          //           _showOnlyFavorites = true;
-          //         } else {
-          //           _showOnlyFavorites = false;
-          //         }
-          //       });
-          //     },
-          //     child: Icon(
-          //         _showOnlyFavorites ? Icons.favorite : Icons.favorite_border),
-          //     itemBuilder: (_) => [
-          //           const PopupMenuItem(
-          //             value: FilterOptions.Favorites,
-          //             child: Text('Only Favourits'),
-          //           ),
-          //           const PopupMenuItem(
-          //             value: FilterOptions.All,
-          //             child: Text('Show all'),
-          //           ),
-          //         ]),
-          Consumer<Cart>(
-            builder: (context, cartData, ch) =>
-                BadgeB(value: cartData.itemCount.toString(), child: ch!),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-              icon: const Icon(Icons.shopping_cart),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plant-O'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    _showOnlyFavorites = !_showOnlyFavorites;
+                  });
+                },
+                icon: Icon(_showOnlyFavorites
+                    ? Icons.favorite
+                    : Icons.favorite_border)),
+            // PopupMenuButton(
+            //     onSelected: (FilterOptions selectedValue) {
+            //       setState(() {
+            //         if (selectedValue == FilterOptions.Favorites) {
+            //           _showOnlyFavorites = true;
+            //         } else {
+            //           _showOnlyFavorites = false;
+            //         }
+            //       });
+            //     },
+            //     child: Icon(
+            //         _showOnlyFavorites ? Icons.favorite : Icons.favorite_border),
+            //     itemBuilder: (_) => [
+            //           const PopupMenuItem(
+            //             value: FilterOptions.Favorites,
+            //             child: Text('Only Favourits'),
+            //           ),
+            //           const PopupMenuItem(
+            //             value: FilterOptions.All,
+            //             child: Text('Show all'),
+            //           ),
+            //         ]),
+            Consumer<Cart>(
+              builder: (context, cartData, ch) =>
+                  BadgeB(value: cartData.itemCount.toString(), child: ch!),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                icon: const Icon(Icons.shopping_cart),
+              ),
             ),
-          ),
-        ],
-      ),
-      drawer: const MainDrawer(),
-      body: Stack(
-        children: [
-          const PageBackground(),
-          _isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ProductsListView(showFav: _showOnlyFavorites),
-        ],
+          ],
+        ),
+        drawer: const MainDrawer(),
+        body: Stack(
+          children: [
+            const PageBackground(),
+            _isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ProductsListView(showFav: _showOnlyFavorites),
+          ],
+        ),
       ),
     );
   }
