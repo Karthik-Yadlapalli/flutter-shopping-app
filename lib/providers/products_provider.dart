@@ -78,6 +78,7 @@ class Products extends ChangeNotifier {
           'isFav': product.isFavourite
         }),
       );
+
       var newProduct = Product(
           dimensions: product.dimensions,
           shipping_return_details: product.shipping_return_details,

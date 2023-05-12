@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/providers/auth.dart';
 import 'package:shop_app/providers/cart.dart';
 import 'package:shop_app/providers/orders.dart';
-import 'package:shop_app/screens/auth_screen.dart';
 import 'package:shop_app/screens/cart_screen.dart';
 import 'package:shop_app/screens/edit_product_screen.dart';
 import 'package:shop_app/screens/orders_screen.dart';
@@ -28,32 +27,30 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Cart()),
         ChangeNotifierProvider(create: (context) => Orders()),
       ],
-      child: Consumer<Auth>(
-        builder: (context, auth, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'MyShop',
-          theme: ThemeData(
-              primarySwatch: Colors.green,
-              accentColor: Colors.greenAccent[700],
-              fontFamily: 'Lato',
-              primaryTextTheme: const TextTheme(
-                  titleLarge: TextStyle(
-                      fontFamily: 'Anton',
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white),
-                  titleMedium: TextStyle(
-                      fontFamily: 'Lato', fontWeight: FontWeight.w400))),
-          initialRoute: ProductsOverview.routeName,
-          routes: {
-            ProductDetailScreen.routeName: (context) =>
-                const ProductDetailScreen(),
-            CartScreen.routeName: (context) => const CartScreen(),
-            OrdersScreen.routeName: (context) => const OrdersScreen(),
-            UserProductScreen.routeName: (context) => const UserProductScreen(),
-            EditProduct.routeName: (context) => const EditProduct()
-          },
-          home: auth.isAuth ? const ProductsOverview() : const AuthScreen(),
-        ),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MyShop',
+        theme: ThemeData(
+            primarySwatch: Colors.green,
+            accentColor: Colors.greenAccent[700],
+            fontFamily: 'Lato',
+            primaryTextTheme: const TextTheme(
+                titleLarge: TextStyle(
+                    fontFamily: 'Anton',
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white),
+                titleMedium: TextStyle(
+                    fontFamily: 'Lato', fontWeight: FontWeight.w400))),
+        initialRoute: ProductsOverview.routeName,
+        routes: {
+          ProductDetailScreen.routeName: (context) =>
+              const ProductDetailScreen(),
+          CartScreen.routeName: (context) => const CartScreen(),
+          OrdersScreen.routeName: (context) => const OrdersScreen(),
+          UserProductScreen.routeName: (context) => const UserProductScreen(),
+          EditProduct.routeName: (context) => const EditProduct()
+        },
+        home: const ProductsOverview(),
       ),
     );
   }
