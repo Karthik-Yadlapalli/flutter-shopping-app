@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_final_fields, unused_field, list_remove_unrelated_type, prefer_const_constructors, avoid_print, use_rethrow_when_possible, unnecessary_null_comparison
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -63,6 +64,7 @@ class Products extends ChangeNotifier {
       'flutter-shop-3f87c-default-rtdb.firebaseio.com',
       '/products.json',
     );
+
     try {
       final response = await http.post(
         url,

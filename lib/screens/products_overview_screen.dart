@@ -6,7 +6,7 @@ import 'package:shop_app/widgets/main_drawer.dart';
 import 'package:shop_app/widgets/page_background.dart';
 import '../providers/cart.dart';
 import '../widgets/badge.dart';
-import '../widgets/products_grid_view.dart';
+import '../widgets/products_list_view.dart';
 import 'package:provider/provider.dart';
 
 enum FilterOptions {
@@ -60,28 +60,6 @@ class _ProductsOverviewState extends State<ProductsOverview> {
                 icon: Icon(_showOnlyFavorites
                     ? Icons.favorite
                     : Icons.favorite_border)),
-            // PopupMenuButton(
-            //     onSelected: (FilterOptions selectedValue) {
-            //       setState(() {
-            //         if (selectedValue == FilterOptions.Favorites) {
-            //           _showOnlyFavorites = true;
-            //         } else {
-            //           _showOnlyFavorites = false;
-            //         }
-            //       });
-            //     },
-            //     child: Icon(
-            //         _showOnlyFavorites ? Icons.favorite : Icons.favorite_border),
-            //     itemBuilder: (_) => [
-            //           const PopupMenuItem(
-            //             value: FilterOptions.Favorites,
-            //             child: Text('Only Favourits'),
-            //           ),
-            //           const PopupMenuItem(
-            //             value: FilterOptions.All,
-            //             child: Text('Show all'),
-            //           ),
-            //         ]),
             Consumer<Cart>(
               builder: (context, cartData, ch) =>
                   BadgeB(value: cartData.itemCount.toString(), child: ch!),
